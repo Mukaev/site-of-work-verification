@@ -1,0 +1,151 @@
+<%- include('layouts/head.ejs')%>
+<link rel="stylesheet" type="text/css" href="/../../public/css/tables.css">
+<link rel="stylesheet" type="text/css" href="/../../public/css/lists.css">
+
+
+<%- include('layouts/menu.ejs')%>
+
+<div class="container">
+    <% if(tasks && tasks.length>0){ %>
+    <div class="row">
+        <div class="col-sm-12">
+            <select onchange="document.location.href = '/professor/' + this.value;">
+                <% for(let task of tasks) {%>
+                <option value="<%=task.id %>" <%=(task.id==currentTask[0].id?' selected':'')%>>
+                    <%=task.description %></option>
+                <% } %>
+            </select>
+        </div>
+    </div>
+    <% } %>
+    <div class="row task">
+        <div class="col-sm-12">
+            <form action="/add/task" method="POST" enctype="multipart/form-data">
+                <label for="description">Описание :</label>
+                <input type="text" name="description" />
+                <label for="filedata">Загрузить файл задания :</label>
+                <input type="file" name="taskfile" required>
+                <input type="submit" value="Добавить задачу" />
+            </form>
+        </div>
+    </div>
+    <% if(students.length>0){ %>
+    <div class="row">
+        <div class="form col-sm-12">
+            <form action="/update/documents/details" method="POST">
+                <div>
+                    <table>
+                        <tr>
+                            <th colspan="2">Студент</th>
+                            <th>Файл</th>
+                            <th>Оценка</th>
+                            <th>проверка на антиплагиат</th>
+                        </tr>
+                        <% for(let st of students) {%>
+                        <% if(st.documents!=undefined && st.documents!=null){ %>
+                        <% if(st.documents.length>0){ %>
+
+
+                        <% for(let document of st.documents){ %>
+                        <tr>
+                            <td><%=st.student.email%></td>
+                            <td><input type="hidden" name="id_<%= document['id'] %>" value="<%= document['id'] %>" />
+                            </td>
+                            <td><a href="download/<%= document['path'] %>"><%= document['name'] %></a></td>
+                            <td><input type="number" max="10" min="0" name="mark_<%= document['id'] %>" id="mark"
+                                    placeholder="<%= document['mark'] %>"></input></td>
+                            <td><% if(document['plagiate_score']==undefined || document['plagiate_score'] == 0) {%>
+                                <input type="checkbox" name="check_<%= document['id'] %>" />проверить
+                                <% }else { %> <p><%=document['plagiate_score'] %></p> <% } %></td>
+                        </tr>
+                        <% } %>
+
+                        <%}%>
+                            <% } %>
+
+                        <% } %>
+                    </table>
+                </div>
+
+                <div>
+                    <input class="detail-form-submit" type="submit" value="проверить" />
+                </div>
+                <div>
+                    <label for="moss-check">Проверить по базовому файлу</label>
+                    <input type="radio" id="moss-check" name="moss-check_0" value="on">
+                    <% if(professorFile){ %>
+
+                    <div class="col-sm-12">
+                        <p>Файл для сравнения : <span><%=professorFile%></span></p>
+                    </div>
+
+                    <% } %>
+                </div>
+                <div>
+                    <select id="select-lang" name="select-lang_0">
+                        <option value="">выберите язык программирования</option>
+                    </select>
+                </div>
+            </form>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+
+            <form id="moss-form" action="/professor/upload/<%=currentTask[0].id %>" method="post" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label class="file-data" for="filedata">Загрузить базовый файл : </label>
+                    </div>
+                    <div class="col-sm-6">
+                        <input class="file-input" type="file" name="filedata" required><br><br>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <input class="btn-submit" type="submit" value="Загрузить файл на сервер" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <% } else { %>
+    <p class="message">У вас нет студентов</p>
+    <% } %>
+
+
+
+</div>
+</body>
+<script>
+
+
+    const languages = ["c", "cc", "java", "ml", "pascal", "ada", "lisp", "scheme", "haskell", "fortran", "ascii", "vhdl", "perl", "matlab", "python", "mips", "prolog", "spice", "vb", "csharp", "modula2", "a8086", "javascript", "plsql", "verilog"]
+    const selectLangFunc = () => {
+        let html = ' <option value="">выберите язык программирования</option>';
+        languages.forEach((lang) => {
+            html += `<option value="${lang}">${lang}</option>`;
+        });
+        return html;
+    }
+    document.getElementById('select-lang').innerHTML = selectLangFunc();
+
+    let moss = document.getElementById('moss-check').checked === true;
+    if (!moss) {
+        document.getElementById('moss-form').style.visibility = 'hidden';
+        document.getElementById('select-lang').style.display = 'none';
+    }
+
+
+    document.getElementById('moss-check').addEventListener('click', () => {
+        moss = !moss;
+        document.getElementById('moss-form').style.visibility = moss ? 'visible' : 'hidden';
+        document.getElementById('select-lang').style.display = moss ? 'block' : 'none';
+
+    });
+
+</script>
+
+</html>

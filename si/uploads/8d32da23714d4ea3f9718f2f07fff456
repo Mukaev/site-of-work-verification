@@ -1,0 +1,13 @@
+ <!DOCTYPE html>
+ <html>
+     <head>
+        <meta charset="utf-8">
+        <meta name="description" content=" Это просто тестовая страница ">
+        <meta name="author" content="Мукаев Илья">
+        <title>Работа с изображениями</title>
+     </head>
+     <body>
+         <img src="https://www.medicalnewstoday.com/content/images/articles/325/325466/man-walking-dog.jpg" width="50%" height="50%" alt="Фото природы"
+         title="471">
+     </body>
+ </html>

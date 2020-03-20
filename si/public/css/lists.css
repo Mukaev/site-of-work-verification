@@ -1,0 +1,86 @@
+.professors-list {
+    display: block;
+    width: 40%;
+    margin-bottom: 30px;
+    font-size: 16px;
+    font-family: 'Times New Roman', Times, serif;
+    padding:20px;
+}
+.professors-list ul{
+    list-style-type: none;
+    margin: 0;
+    padding:0;
+
+}
+.professors-list   a{
+    text-decoration: none;
+    color: rgba(5, 87, 62, 0.897);
+   
+    padding-left: 20%;
+    padding-right: 20%;
+}
+.professors-list  a:hover,a:active{
+    color:rgb(13, 29, 2);
+}
+.professors-list   li{    
+    display:block;
+    padding-left: 20%;
+    padding-right: 20%;
+    padding-top:5px;
+    padding-bottom: 5px;
+}
+.student-message{
+    font-size: 16px;
+    color: rgb(13, 29, 2);
+    
+    padding:5px;
+    margin: 5px;
+    display: block;
+    width: 40%;
+}
+.btn-submit{
+    background-color:  rgba(5, 87, 62, 0.897);
+    color: white;
+    padding:20px;
+    border-radius: 5px;
+}
+.btn-submit :hover, .file-input :hover{
+    background-color:  rgba(78, 153, 130, 0.897);
+    color: rgba(5, 87, 62, 0.897);
+}
+.file-input{
+    background-color:  rgba(5, 87, 62, 0.897);
+    color: white;
+    padding:20px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+.moss{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: rgb(2, 46, 2);
+    font-weight: bold;
+    font-size: 14px;
+}
+.moss input{
+    margin-top: 10px;
+   
+}
+#select-lang{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 5px;
+}
+.file-data{
+    
+    padding: 5px;
+}
+.task{
+    border:grey solid 1px;
+    border-radius: 5px;
+    padding: 50px;
+}
+.task input[type=file]{
+    background-color: rgb(247, 248, 244);
+    color: rgba(0, 0, 0, 0.603);
+}
