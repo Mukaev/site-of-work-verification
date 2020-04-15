@@ -1,9 +1,9 @@
 FROM gitpod/workspace-mysql
                     
-USER gitpod
+USER root
 
-RUN sudo apt-get -q update && \
-     sudo apt-get install nodejs
+RUN apt-get -q update && \
+     apt-get install nodejs
     
 RUN npm install -g nodemon
 
