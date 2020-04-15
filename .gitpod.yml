@@ -1,4 +1,0 @@
-# exposed ports
-ports:
-- port: 3030
-  onOpen: open-preview
