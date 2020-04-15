@@ -19,7 +19,7 @@ const store = new MySQLStore({
     host: 'localhost',
     port: 3306,
     user: 'root',
-    password: 'mukaevilia44',
+    password: '',
     database: 'studiu'
 });
 
