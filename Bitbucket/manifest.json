@@ -1,0 +1,28 @@
+{   
+    "name": "Hello world",
+    "description": "Base Level ",
+    "background": {
+        "scripts": [
+            "background.js"
+        ]
+    },
+    "permissions": [
+        "clipboardWrite",
+        "storage"
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "content.js"
+            ]
+        }
+    ],
+    "version": "1.0",
+    "manifest_version": 2,
+    "browser_action": {
+        "default_icon": "84375.png"
+    }
+}
